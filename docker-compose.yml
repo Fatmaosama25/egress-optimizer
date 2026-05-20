@@ -1,0 +1,46 @@
+# ============================================================
+# DevOps Automation for Cloud Egress Cost Optimization
+# Docker Compose - LocalStack (AWS) + MinIO (Local Server)
+# ============================================================
+
+version: '3.8'
+
+services:
+  # --- LocalStack: Simulates AWS Cloud (S3 + CloudWatch) ---
+  localstack:
+    image: localstack/localstack:latest
+    container_name: egress-localstack
+    ports:
+      - "4566:4566"           # Main gateway for all AWS services
+    environment:
+      - SERVICES=s3,cloudwatch,cloudwatchlogs
+      - DEFAULT_REGION=us-east-1
+      - DEBUG=0
+    volumes:
+      - localstack-data:/var/lib/localstack
+    networks:
+      - egress-net
+
+  # --- MinIO: Simulates On-Premise Local Server ---
+  minio:
+    image: minio/minio:latest
+    container_name: egress-minio
+    ports:
+      - "9000:9000"           # S3-compatible API
+      - "9001:9001"           # Web console (dashboard)
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin123
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - egress-net
+
+volumes:
+  localstack-data:
+  minio-data:
+
+networks:
+  egress-net:
+    driver: bridge

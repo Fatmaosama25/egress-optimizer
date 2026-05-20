@@ -1,0 +1,70 @@
+# ============================================================
+# DevOps Automation for Cloud Egress Cost Optimization
+# Configuration File - Thresholds & Pricing
+# ============================================================
+
+# --- Data Classification Thresholds ---
+classification:
+  hot:
+    min_access_per_day: 10        # > 10 accesses/day
+    max_days_since_access: 7      # accessed within last 7 days
+    storage_location: "local"
+    description: "Frequently accessed - store locally"
+
+  warm:
+    min_access_per_day: 1         # 1-10 accesses/day
+    max_days_since_access: 30     # accessed within last 30 days
+    storage_location: "local"
+    description: "Moderately accessed - store locally"
+
+  cold:
+    max_access_per_week: 1        # < 1 access/week
+    min_days_since_access: 30     # not accessed for 30+ days
+    storage_location: "cloud_s3"
+    storage_class: "STANDARD"
+    description: "Rarely accessed - store in cloud"
+
+  archive:
+    max_access_per_month: 1       # < 1 access/month
+    min_days_since_access: 90     # not accessed for 90+ days
+    storage_location: "cloud_glacier"
+    storage_class: "GLACIER"
+    description: "Almost never accessed - archive in Glacier"
+
+# --- Cost Trigger Thresholds ---
+cost_triggers:
+  daily_egress_alert: 100         # $100/day triggers optimization
+  monthly_egress_alert: 3000      # $3,000/month triggers alert + auto-optimize
+  single_transfer_log: 10         # Log transfers > 10GB
+  spike_percentage: 200           # Alert on 200% spike vs average
+
+# --- AWS Pricing (per GB) ---
+pricing:
+  egress_per_gb: 0.09             # $0.09/GB data transfer out
+  s3_storage_per_gb: 0.023        # $0.023/GB/month S3 Standard
+  s3_ia_storage_per_gb: 0.0125    # $0.0125/GB/month S3 Infrequent Access
+  glacier_storage_per_gb: 0.004   # $0.004/GB/month S3 Glacier
+  glacier_retrieval_per_gb: 0.01  # $0.01/GB retrieval from Glacier
+
+# --- Local Server ---
+local_server:
+  investment_cost: 25000          # $25,000 one-time
+  monthly_operating: 150          # $150/month (electricity + maintenance)
+  capacity_tb: 100                # 100TB total capacity
+  amortization_months: 36         # Amortize over 3 years
+
+# --- Migration Rules ---
+migration:
+  payback_months: 6               # Only migrate if payback < 6 months
+  cooldown_days: 14               # Minimum days before re-migration
+  batch_size_gb: 500              # Max GB per migration batch
+  min_savings_threshold: 10       # Minimum $10/month savings to justify migration
+
+# --- Simulation Settings ---
+simulation:
+  num_files: 80                   # Number of files to simulate
+  min_file_size_gb: 0.1           # 100MB minimum
+  max_file_size_gb: 50            # 50GB maximum
+  total_capacity_tb: 100          # Total simulated data
+  time_range_days: 120            # Simulate 120 days of history
+  seed: 42                        # Random seed for reproducibility
