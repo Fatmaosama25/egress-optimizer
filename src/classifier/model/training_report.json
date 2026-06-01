@@ -1,5 +1,5 @@
 {
-  "trained_at": "2026-06-02T00:33:52.262548",
+  "trained_at": "2026-06-02T00:52:42.752560",
   "model_type": "random_forest",
   "test_accuracy": 1.0,
   "cv_accuracy_mean": 1.0,
@@ -27,26 +27,26 @@
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 99.0
+      "support": 240.0
     },
     "COLD": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 141.0
+      "support": 360.0
     },
     "accuracy": 1.0,
     "macro avg": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 240.0
+      "support": 600.0
     },
     "weighted avg": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 240.0
+      "support": 600.0
     }
   }
 }

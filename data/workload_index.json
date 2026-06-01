@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-02T00:31:05.051371",
+  "generated_at": "2026-06-02T00:49:52.270590",
   "files": [
     {
       "file_id": "file-0000",
@@ -800,6 +800,1206 @@
       "location": "cloud_s3",
       "access_today": 72.4,
       "days_since_access": 6
+    },
+    {
+      "file_id": "file-0080",
+      "file_name": "user_profile_080.log",
+      "size_gb": 41.78,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_glacier",
+      "access_today": 0.2,
+      "days_since_access": 49
+    },
+    {
+      "file_id": "file-0081",
+      "file_name": "product_catalog_081.tar.gz",
+      "size_gb": 10.34,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 23
+    },
+    {
+      "file_id": "file-0082",
+      "file_name": "iot_telemetry_082.sql",
+      "size_gb": 4.08,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 5.2,
+      "days_since_access": 9
+    },
+    {
+      "file_id": "file-0083",
+      "file_name": "payment_records_083.json",
+      "size_gb": 17.29,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 39
+    },
+    {
+      "file_id": "file-0084",
+      "file_name": "api_logs_084.parquet",
+      "size_gb": 16.59,
+      "category": "cold",
+      "department": "engineering",
+      "location": "local",
+      "access_today": 0.2,
+      "days_since_access": 99
+    },
+    {
+      "file_id": "file-0085",
+      "file_name": "image_repository_085.json",
+      "size_gb": 13.06,
+      "category": "hot",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 88.0,
+      "days_since_access": 7
+    },
+    {
+      "file_id": "file-0086",
+      "file_name": "product_catalog_086.parquet",
+      "size_gb": 24.01,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_glacier",
+      "access_today": 0.5,
+      "days_since_access": 98
+    },
+    {
+      "file_id": "file-0087",
+      "file_name": "media_assets_087.log",
+      "size_gb": 10.81,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 77.1,
+      "days_since_access": 1
+    },
+    {
+      "file_id": "file-0088",
+      "file_name": "support_tickets_088.parquet",
+      "size_gb": 22.26,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.0,
+      "days_since_access": 71
+    },
+    {
+      "file_id": "file-0089",
+      "file_name": "iot_telemetry_089.parquet",
+      "size_gb": 4.47,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 40.6,
+      "days_since_access": 9
+    },
+    {
+      "file_id": "file-0090",
+      "file_name": "video_archive_090.tar.gz",
+      "size_gb": 9.33,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 27.9,
+      "days_since_access": 7
+    },
+    {
+      "file_id": "file-0091",
+      "file_name": "iot_telemetry_091.tar.gz",
+      "size_gb": 45.16,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 59
+    },
+    {
+      "file_id": "file-0092",
+      "file_name": "session_data_092.json",
+      "size_gb": 10.76,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 88
+    },
+    {
+      "file_id": "file-0093",
+      "file_name": "web_crawl_data_093.log",
+      "size_gb": 6.0,
+      "category": "hot",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 5.8,
+      "days_since_access": 0
+    },
+    {
+      "file_id": "file-0094",
+      "file_name": "audit_log_094.csv",
+      "size_gb": 30.75,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 101
+    },
+    {
+      "file_id": "file-0095",
+      "file_name": "session_data_095.parquet",
+      "size_gb": 8.74,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 74.6,
+      "days_since_access": 6
+    },
+    {
+      "file_id": "file-0096",
+      "file_name": "config_backup_096.sql",
+      "size_gb": 25.59,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 76
+    },
+    {
+      "file_id": "file-0097",
+      "file_name": "session_data_097.parquet",
+      "size_gb": 7.9,
+      "category": "cold",
+      "department": "operations",
+      "location": "local",
+      "access_today": 0.5,
+      "days_since_access": 65
+    },
+    {
+      "file_id": "file-0098",
+      "file_name": "document_store_098.parquet",
+      "size_gb": 6.88,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 68.9,
+      "days_since_access": 10
+    },
+    {
+      "file_id": "file-0099",
+      "file_name": "video_archive_099.sql",
+      "size_gb": 17.07,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 74
+    },
+    {
+      "file_id": "file-0100",
+      "file_name": "analytics_report_100.parquet",
+      "size_gb": 4.64,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 51.8,
+      "days_since_access": 2
+    },
+    {
+      "file_id": "file-0101",
+      "file_name": "support_tickets_101.log",
+      "size_gb": 8.57,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 67
+    },
+    {
+      "file_id": "file-0102",
+      "file_name": "session_data_102.csv",
+      "size_gb": 12.85,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 14.4,
+      "days_since_access": 10
+    },
+    {
+      "file_id": "file-0103",
+      "file_name": "user_profile_103.tar.gz",
+      "size_gb": 1.47,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 25.2,
+      "days_since_access": 0
+    },
+    {
+      "file_id": "file-0104",
+      "file_name": "sales_data_104.parquet",
+      "size_gb": 41.66,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 44
+    },
+    {
+      "file_id": "file-0105",
+      "file_name": "search_index_105.csv",
+      "size_gb": 14.81,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 56.3,
+      "days_since_access": 0
+    },
+    {
+      "file_id": "file-0106",
+      "file_name": "customer_data_106.csv",
+      "size_gb": 14.0,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 23
+    },
+    {
+      "file_id": "file-0107",
+      "file_name": "user_profile_107.tar.gz",
+      "size_gb": 25.69,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.5,
+      "days_since_access": 99
+    },
+    {
+      "file_id": "file-0108",
+      "file_name": "payment_records_108.tar.gz",
+      "size_gb": 6.45,
+      "category": "hot",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 15.3,
+      "days_since_access": 1
+    },
+    {
+      "file_id": "file-0109",
+      "file_name": "video_archive_109.log",
+      "size_gb": 8.82,
+      "category": "hot",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 72.7,
+      "days_since_access": 4
+    },
+    {
+      "file_id": "file-0110",
+      "file_name": "financial_report_110.parquet",
+      "size_gb": 12.81,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 66.8,
+      "days_since_access": 3
+    },
+    {
+      "file_id": "file-0111",
+      "file_name": "web_crawl_data_111.tar.gz",
+      "size_gb": 20.54,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_glacier",
+      "access_today": 0.4,
+      "days_since_access": 47
+    },
+    {
+      "file_id": "file-0112",
+      "file_name": "web_crawl_data_112.parquet",
+      "size_gb": 1.49,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 14.2,
+      "days_since_access": 8
+    },
+    {
+      "file_id": "file-0113",
+      "file_name": "hr_data_113.parquet",
+      "size_gb": 21.13,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_glacier",
+      "access_today": 0.4,
+      "days_since_access": 107
+    },
+    {
+      "file_id": "file-0114",
+      "file_name": "email_archive_114.csv",
+      "size_gb": 2.41,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 50.8,
+      "days_since_access": 8
+    },
+    {
+      "file_id": "file-0115",
+      "file_name": "iot_telemetry_115.tar.gz",
+      "size_gb": 42.41,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.5,
+      "days_since_access": 97
+    },
+    {
+      "file_id": "file-0116",
+      "file_name": "backup_db_116.log",
+      "size_gb": 11.46,
+      "category": "hot",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 92.5,
+      "days_since_access": 2
+    },
+    {
+      "file_id": "file-0117",
+      "file_name": "compliance_records_117.parquet",
+      "size_gb": 1.47,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 55.4,
+      "days_since_access": 2
+    },
+    {
+      "file_id": "file-0118",
+      "file_name": "image_repository_118.sql",
+      "size_gb": 5.16,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.0,
+      "days_since_access": 101
+    },
+    {
+      "file_id": "file-0119",
+      "file_name": "session_data_119.tar.gz",
+      "size_gb": 14.39,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 51
+    },
+    {
+      "file_id": "file-0120",
+      "file_name": "ml_training_data_120.sql",
+      "size_gb": 0.92,
+      "category": "hot",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 24.4,
+      "days_since_access": 4
+    },
+    {
+      "file_id": "file-0121",
+      "file_name": "api_logs_121.csv",
+      "size_gb": 7.33,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 100
+    },
+    {
+      "file_id": "file-0122",
+      "file_name": "session_data_122.parquet",
+      "size_gb": 43.24,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 68
+    },
+    {
+      "file_id": "file-0123",
+      "file_name": "inventory_snapshot_123.sql",
+      "size_gb": 23.54,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 28
+    },
+    {
+      "file_id": "file-0124",
+      "file_name": "ml_training_data_124.json",
+      "size_gb": 37.54,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 96
+    },
+    {
+      "file_id": "file-0125",
+      "file_name": "config_backup_125.json",
+      "size_gb": 36.64,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 33
+    },
+    {
+      "file_id": "file-0126",
+      "file_name": "sensor_data_126.log",
+      "size_gb": 1.22,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 95.4,
+      "days_since_access": 9
+    },
+    {
+      "file_id": "file-0127",
+      "file_name": "video_archive_127.json",
+      "size_gb": 43.35,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 71
+    },
+    {
+      "file_id": "file-0128",
+      "file_name": "config_backup_128.sql",
+      "size_gb": 4.64,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 51
+    },
+    {
+      "file_id": "file-0129",
+      "file_name": "email_archive_129.tar.gz",
+      "size_gb": 23.67,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 72
+    },
+    {
+      "file_id": "file-0130",
+      "file_name": "email_archive_130.csv",
+      "size_gb": 47.93,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 106
+    },
+    {
+      "file_id": "file-0131",
+      "file_name": "financial_report_131.tar.gz",
+      "size_gb": 14.87,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 54.8,
+      "days_since_access": 4
+    },
+    {
+      "file_id": "file-0132",
+      "file_name": "analytics_report_132.log",
+      "size_gb": 32.72,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.0,
+      "days_since_access": 51
+    },
+    {
+      "file_id": "file-0133",
+      "file_name": "media_assets_133.parquet",
+      "size_gb": 29.55,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 104
+    },
+    {
+      "file_id": "file-0134",
+      "file_name": "ml_training_data_134.log",
+      "size_gb": 11.9,
+      "category": "hot",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 82.3,
+      "days_since_access": 10
+    },
+    {
+      "file_id": "file-0135",
+      "file_name": "customer_data_135.json",
+      "size_gb": 16.13,
+      "category": "cold",
+      "department": "finance",
+      "location": "local",
+      "access_today": 0.5,
+      "days_since_access": 39
+    },
+    {
+      "file_id": "file-0136",
+      "file_name": "user_profile_136.sql",
+      "size_gb": 38.77,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 58
+    },
+    {
+      "file_id": "file-0137",
+      "file_name": "product_catalog_137.csv",
+      "size_gb": 9.86,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 107
+    },
+    {
+      "file_id": "file-0138",
+      "file_name": "marketing_assets_138.tar.gz",
+      "size_gb": 30.92,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_glacier",
+      "access_today": 0.4,
+      "days_since_access": 45
+    },
+    {
+      "file_id": "file-0139",
+      "file_name": "image_repository_139.tar.gz",
+      "size_gb": 6.98,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 31.8,
+      "days_since_access": 2
+    },
+    {
+      "file_id": "file-0140",
+      "file_name": "backup_db_140.parquet",
+      "size_gb": 9.65,
+      "category": "hot",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 88.0,
+      "days_since_access": 8
+    },
+    {
+      "file_id": "file-0141",
+      "file_name": "backup_db_141.tar.gz",
+      "size_gb": 45.36,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_glacier",
+      "access_today": 0.1,
+      "days_since_access": 43
+    },
+    {
+      "file_id": "file-0142",
+      "file_name": "email_archive_142.json",
+      "size_gb": 3.61,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 99.5,
+      "days_since_access": 1
+    },
+    {
+      "file_id": "file-0143",
+      "file_name": "product_catalog_143.parquet",
+      "size_gb": 15.06,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 105
+    },
+    {
+      "file_id": "file-0144",
+      "file_name": "customer_data_144.json",
+      "size_gb": 11.57,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 69
+    },
+    {
+      "file_id": "file-0145",
+      "file_name": "analytics_report_145.csv",
+      "size_gb": 6.36,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 80.4,
+      "days_since_access": 7
+    },
+    {
+      "file_id": "file-0146",
+      "file_name": "financial_report_146.csv",
+      "size_gb": 15.27,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.0,
+      "days_since_access": 38
+    },
+    {
+      "file_id": "file-0147",
+      "file_name": "email_archive_147.sql",
+      "size_gb": 7.66,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 98.9,
+      "days_since_access": 7
+    },
+    {
+      "file_id": "file-0148",
+      "file_name": "customer_data_148.json",
+      "size_gb": 11.85,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 37.8,
+      "days_since_access": 9
+    },
+    {
+      "file_id": "file-0149",
+      "file_name": "document_store_149.json",
+      "size_gb": 12.22,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 21.6,
+      "days_since_access": 7
+    },
+    {
+      "file_id": "file-0150",
+      "file_name": "sensor_data_150.tar.gz",
+      "size_gb": 0.65,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 24.2,
+      "days_since_access": 5
+    },
+    {
+      "file_id": "file-0151",
+      "file_name": "analytics_report_151.log",
+      "size_gb": 10.36,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 57
+    },
+    {
+      "file_id": "file-0152",
+      "file_name": "ml_training_data_152.log",
+      "size_gb": 22.55,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.5,
+      "days_since_access": 103
+    },
+    {
+      "file_id": "file-0153",
+      "file_name": "transaction_log_153.log",
+      "size_gb": 6.43,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 45.9,
+      "days_since_access": 4
+    },
+    {
+      "file_id": "file-0154",
+      "file_name": "audit_log_154.tar.gz",
+      "size_gb": 30.53,
+      "category": "cold",
+      "department": "operations",
+      "location": "local",
+      "access_today": 0.2,
+      "days_since_access": 20
+    },
+    {
+      "file_id": "file-0155",
+      "file_name": "iot_telemetry_155.parquet",
+      "size_gb": 1.22,
+      "category": "hot",
+      "department": "analytics",
+      "location": "local",
+      "access_today": 65.6,
+      "days_since_access": 10
+    },
+    {
+      "file_id": "file-0156",
+      "file_name": "session_data_156.parquet",
+      "size_gb": 7.19,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 87
+    },
+    {
+      "file_id": "file-0157",
+      "file_name": "config_backup_157.tar.gz",
+      "size_gb": 38.39,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 98
+    },
+    {
+      "file_id": "file-0158",
+      "file_name": "inventory_snapshot_158.tar.gz",
+      "size_gb": 7.81,
+      "category": "hot",
+      "department": "operations",
+      "location": "local",
+      "access_today": 91.8,
+      "days_since_access": 7
+    },
+    {
+      "file_id": "file-0159",
+      "file_name": "product_catalog_159.parquet",
+      "size_gb": 6.84,
+      "category": "hot",
+      "department": "engineering",
+      "location": "cloud_glacier",
+      "access_today": 90.4,
+      "days_since_access": 10
+    },
+    {
+      "file_id": "file-0160",
+      "file_name": "audit_log_160.json",
+      "size_gb": 42.72,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 116
+    },
+    {
+      "file_id": "file-0161",
+      "file_name": "iot_telemetry_161.csv",
+      "size_gb": 12.6,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 74
+    },
+    {
+      "file_id": "file-0162",
+      "file_name": "ml_training_data_162.log",
+      "size_gb": 10.81,
+      "category": "hot",
+      "department": "operations",
+      "location": "cloud_glacier",
+      "access_today": 54.9,
+      "days_since_access": 1
+    },
+    {
+      "file_id": "file-0163",
+      "file_name": "email_archive_163.json",
+      "size_gb": 7.29,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 113
+    },
+    {
+      "file_id": "file-0164",
+      "file_name": "email_archive_164.csv",
+      "size_gb": 15.9,
+      "category": "cold",
+      "department": "analytics",
+      "location": "local",
+      "access_today": 0.1,
+      "days_since_access": 81
+    },
+    {
+      "file_id": "file-0165",
+      "file_name": "compliance_records_165.json",
+      "size_gb": 9.25,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 13.9,
+      "days_since_access": 9
+    },
+    {
+      "file_id": "file-0166",
+      "file_name": "video_archive_166.json",
+      "size_gb": 42.28,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 20
+    },
+    {
+      "file_id": "file-0167",
+      "file_name": "sensor_data_167.sql",
+      "size_gb": 21.41,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 52
+    },
+    {
+      "file_id": "file-0168",
+      "file_name": "transaction_log_168.log",
+      "size_gb": 0.99,
+      "category": "hot",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 46.8,
+      "days_since_access": 9
+    },
+    {
+      "file_id": "file-0169",
+      "file_name": "search_index_169.json",
+      "size_gb": 48.79,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 55
+    },
+    {
+      "file_id": "file-0170",
+      "file_name": "product_catalog_170.parquet",
+      "size_gb": 3.48,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_glacier",
+      "access_today": 0.5,
+      "days_since_access": 35
+    },
+    {
+      "file_id": "file-0171",
+      "file_name": "payment_records_171.sql",
+      "size_gb": 23.87,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 65
+    },
+    {
+      "file_id": "file-0172",
+      "file_name": "config_backup_172.parquet",
+      "size_gb": 0.85,
+      "category": "hot",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 52.0,
+      "days_since_access": 7
+    },
+    {
+      "file_id": "file-0173",
+      "file_name": "backup_db_173.log",
+      "size_gb": 18.92,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 86
+    },
+    {
+      "file_id": "file-0174",
+      "file_name": "email_archive_174.tar.gz",
+      "size_gb": 11.49,
+      "category": "hot",
+      "department": "finance",
+      "location": "local",
+      "access_today": 31.6,
+      "days_since_access": 1
+    },
+    {
+      "file_id": "file-0175",
+      "file_name": "config_backup_175.csv",
+      "size_gb": 10.75,
+      "category": "cold",
+      "department": "marketing",
+      "location": "cloud_glacier",
+      "access_today": 0.3,
+      "days_since_access": 32
+    },
+    {
+      "file_id": "file-0176",
+      "file_name": "email_archive_176.csv",
+      "size_gb": 17.07,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 109
+    },
+    {
+      "file_id": "file-0177",
+      "file_name": "document_store_177.tar.gz",
+      "size_gb": 35.73,
+      "category": "cold",
+      "department": "engineering",
+      "location": "cloud_glacier",
+      "access_today": 0.1,
+      "days_since_access": 101
+    },
+    {
+      "file_id": "file-0178",
+      "file_name": "backup_db_178.log",
+      "size_gb": 39.36,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 89
+    },
+    {
+      "file_id": "file-0179",
+      "file_name": "ml_training_data_179.csv",
+      "size_gb": 41.26,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 39
+    },
+    {
+      "file_id": "file-0180",
+      "file_name": "financial_report_180.csv",
+      "size_gb": 6.21,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_s3",
+      "access_today": 78.6,
+      "days_since_access": 0
+    },
+    {
+      "file_id": "file-0181",
+      "file_name": "hr_data_181.tar.gz",
+      "size_gb": 26.75,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 58
+    },
+    {
+      "file_id": "file-0182",
+      "file_name": "sales_data_182.csv",
+      "size_gb": 14.67,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 113
+    },
+    {
+      "file_id": "file-0183",
+      "file_name": "config_backup_183.sql",
+      "size_gb": 14.01,
+      "category": "hot",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 80.6,
+      "days_since_access": 10
+    },
+    {
+      "file_id": "file-0184",
+      "file_name": "sensor_data_184.csv",
+      "size_gb": 15.23,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.1,
+      "days_since_access": 71
+    },
+    {
+      "file_id": "file-0185",
+      "file_name": "web_crawl_data_185.sql",
+      "size_gb": 4.14,
+      "category": "hot",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 58.4,
+      "days_since_access": 9
+    },
+    {
+      "file_id": "file-0186",
+      "file_name": "marketing_assets_186.parquet",
+      "size_gb": 1.59,
+      "category": "hot",
+      "department": "marketing",
+      "location": "cloud_glacier",
+      "access_today": 36.4,
+      "days_since_access": 2
+    },
+    {
+      "file_id": "file-0187",
+      "file_name": "payment_records_187.tar.gz",
+      "size_gb": 32.88,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 22
+    },
+    {
+      "file_id": "file-0188",
+      "file_name": "support_tickets_188.log",
+      "size_gb": 12.77,
+      "category": "hot",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 8.5,
+      "days_since_access": 2
+    },
+    {
+      "file_id": "file-0189",
+      "file_name": "inventory_snapshot_189.log",
+      "size_gb": 48.14,
+      "category": "cold",
+      "department": "operations",
+      "location": "local",
+      "access_today": 0.5,
+      "days_since_access": 87
+    },
+    {
+      "file_id": "file-0190",
+      "file_name": "document_store_190.sql",
+      "size_gb": 25.2,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.5,
+      "days_since_access": 39
+    },
+    {
+      "file_id": "file-0191",
+      "file_name": "financial_report_191.csv",
+      "size_gb": 1.69,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 39
+    },
+    {
+      "file_id": "file-0192",
+      "file_name": "email_archive_192.json",
+      "size_gb": 5.25,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 56
+    },
+    {
+      "file_id": "file-0193",
+      "file_name": "sensor_data_193.json",
+      "size_gb": 14.32,
+      "category": "hot",
+      "department": "engineering",
+      "location": "cloud_s3",
+      "access_today": 33.7,
+      "days_since_access": 10
+    },
+    {
+      "file_id": "file-0194",
+      "file_name": "session_data_194.json",
+      "size_gb": 8.83,
+      "category": "cold",
+      "department": "finance",
+      "location": "cloud_s3",
+      "access_today": 0.3,
+      "days_since_access": 113
+    },
+    {
+      "file_id": "file-0195",
+      "file_name": "marketing_assets_195.csv",
+      "size_gb": 14.36,
+      "category": "hot",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 50.4,
+      "days_since_access": 5
+    },
+    {
+      "file_id": "file-0196",
+      "file_name": "iot_telemetry_196.log",
+      "size_gb": 41.45,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 115
+    },
+    {
+      "file_id": "file-0197",
+      "file_name": "transaction_log_197.sql",
+      "size_gb": 6.5,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 83
+    },
+    {
+      "file_id": "file-0198",
+      "file_name": "hr_data_198.csv",
+      "size_gb": 36.13,
+      "category": "cold",
+      "department": "operations",
+      "location": "cloud_s3",
+      "access_today": 0.2,
+      "days_since_access": 22
+    },
+    {
+      "file_id": "file-0199",
+      "file_name": "analytics_report_199.sql",
+      "size_gb": 23.66,
+      "category": "cold",
+      "department": "analytics",
+      "location": "cloud_s3",
+      "access_today": 0.4,
+      "days_since_access": 119
     }
   ]
 }

@@ -34,7 +34,6 @@ classification:
     storage_location: "cloud_s3"
     storage_class: "STANDARD"
     description: "Rarely accessed - keep in cloud (cheap storage)"
-    description: "Almost never accessed - archive in Glacier"
 
 # --- Cost Trigger Thresholds ---
 cost_triggers:
@@ -67,7 +66,7 @@ migration:
 
 # --- Simulation Settings ---
 simulation:
-  num_files: 80                   # Number of files to simulate
+  num_files: 200                  # Number of files to simulate
   min_file_size_gb: 0.1           # 100MB minimum
   max_file_size_gb: 50            # 50GB maximum
   total_capacity_tb: 100          # Total simulated data
