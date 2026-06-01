@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.collector.simulated_collector import SimulatedCollector
 from src.collector.aws_collector import AWSCollector
 from src.analyzer.cost_analyzer import CostAnalyzer
-from src.classifier.hot_cold_classifier import HotColdClassifier
+from src.classifier.ml_classifier import MLClassifier
 from src.optimizer.migration_optimizer import MigrationOptimizer
 from src.iac_generator.terraform_generator import TerraformGenerator
 from src.monitor.savings_tracker import SavingsTracker
@@ -101,10 +101,11 @@ def run_pipeline():
         print(f"    {i}. {f['file_name']:<35} ${f['total_monthly_cost']:.2f}/mo "
               f"({f['size_gb']:.1f}GB, {f['location']})")
 
-    # ===== LAYER 3: CLASSIFICATION =====
-    print_header("Layer 3: Hot/Cold Classification")
-    classifier = HotColdClassifier(config)
+    # ===== LAYER 3: CLASSIFICATION (ML) =====
+    print_header("Layer 3: ML Classification")
+    classifier = MLClassifier(config)
     classification = classifier.classify(collection.files)
+    print_metric("Method:", classifier.get_method_name())
 
     print("  Classification Summary:")
     for tier, count in classification.summary.items():
