@@ -638,9 +638,7 @@ function renderTierBars(cls) {
     const total = cls.total_files || 1;
     const tiers = [
         { key: 'HOT', cls: 'tier-hot', icon: '&#128293;' },
-        { key: 'WARM', cls: 'tier-warm', icon: '&#127777;' },
         { key: 'COLD', cls: 'tier-cold', icon: '&#10052;' },
-        { key: 'ARCHIVE', cls: 'tier-archive', icon: '&#128451;' },
     ];
     return tiers.map(t => {
         const count = summary[t.key] || 0;

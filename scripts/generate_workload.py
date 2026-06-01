@@ -100,10 +100,10 @@ def generate_workload(config):
     files_metadata = []
 
     for i in range(num_files):
-        # Determine category
+        # Determine category (binary: hot or cold)
         category = random.choices(
-            ["hot", "warm", "cold", "archive"],
-            weights=[20, 15, 40, 25],
+            ["hot", "cold"],
+            weights=[40, 60],
             k=1
         )[0]
 
@@ -214,36 +214,22 @@ def setup_minio(config):
 
 def _generate_size(category):
     if category == "hot":
-        return random.uniform(0.1, 10)
-    elif category == "warm":
-        return random.uniform(0.5, 20)
-    elif category == "cold":
-        return random.uniform(1, 30)
-    else:
-        return random.uniform(5, 50)
+        return random.uniform(0.1, 15)
+    else:  # cold
+        return random.uniform(1, 50)
 
 
 def _generate_access_pattern(category):
     if category == "hot":
-        access_today = random.uniform(12, 100)
-        access_weekly = access_today * 7 * random.uniform(0.8, 1.0)
-        access_monthly = access_weekly * 4.3 * random.uniform(0.8, 1.0)
-        days_since = random.randint(0, 3)
-    elif category == "warm":
-        access_today = random.uniform(1.5, 9)
-        access_weekly = access_today * 7 * random.uniform(0.6, 0.9)
-        access_monthly = access_weekly * 4.3 * random.uniform(0.6, 0.9)
-        days_since = random.randint(1, 15)
-    elif category == "cold":
-        access_today = random.uniform(0, 0.12)
-        access_weekly = random.uniform(0.1, 0.9)
-        access_monthly = access_weekly * 4.3 * random.uniform(0.5, 1.0)
-        days_since = random.randint(31, 80)
-    else:
-        access_today = random.uniform(0, 0.03)
-        access_weekly = random.uniform(0, 0.2)
-        access_monthly = random.uniform(0.1, 0.8)
-        days_since = random.randint(91, 120)
+        access_today = random.uniform(5, 100)
+        access_weekly = access_today * 7 * random.uniform(0.7, 1.0)
+        access_monthly = access_weekly * 4.3 * random.uniform(0.7, 1.0)
+        days_since = random.randint(0, 10)
+    else:  # cold
+        access_today = random.uniform(0, 0.5)
+        access_weekly = random.uniform(0, 2)
+        access_monthly = random.uniform(0.1, 5)
+        days_since = random.randint(15, 120)
     return access_today, access_weekly, access_monthly, days_since
 
 

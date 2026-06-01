@@ -14,26 +14,20 @@ from src.collector.base import FileAccessRecord
 
 
 class DataTier(Enum):
-    """Data classification tiers."""
+    """Data classification tiers — Binary: Hot vs Cold."""
     HOT = "HOT"
-    WARM = "WARM"
     COLD = "COLD"
-    ARCHIVE = "ARCHIVE"
 
 
 # Recommended storage locations per tier
 TIER_LOCATIONS = {
     DataTier.HOT: "local",
-    DataTier.WARM: "local",
     DataTier.COLD: "cloud_s3",
-    DataTier.ARCHIVE: "cloud_glacier",
 }
 
 TIER_DESCRIPTIONS = {
-    DataTier.HOT: "🔥 Frequently accessed — store on local server (zero egress)",
-    DataTier.WARM: "🌡️ Moderately accessed — store on local server",
-    DataTier.COLD: "🧊 Rarely accessed — store in AWS S3 (cheap storage)",
-    DataTier.ARCHIVE: "❄️ Almost never accessed — archive in S3 Glacier",
+    DataTier.HOT: "Frequently accessed - store on local server (zero egress)",
+    DataTier.COLD: "Rarely accessed - keep in cloud S3 (cheap storage)",
 }
 
 
@@ -68,19 +62,13 @@ class HotColdClassifier:
     """
     Layer 3 of the 6-Layer Framework.
     
-    Classification Algorithm (from thesis thresholds.html):
+    Binary Classification Algorithm:
     
-    IF access_frequency > 10/day AND last_access < 7 days:
-        → HOT → Keep on Local Server
+    IF access_frequency >= threshold AND last_access < recency_limit:
+        -> HOT -> Store on Local Server (zero egress cost)
         
-    ELSE IF access_frequency >= 1/day AND last_access < 30 days:
-        → WARM → Keep on Local Server
-        
-    ELSE IF access_frequency < 1/week AND last_access > 30 days:
-        → COLD → Move to Cloud (S3)
-        
-    ELSE IF access_frequency < 1/month AND last_access > 90 days:
-        → ARCHIVE → Move to Cloud Archive (S3 Glacier)
+    ELSE:
+        -> COLD -> Keep in Cloud S3 (cheap storage)
     """
 
     def __init__(self, config: dict):
@@ -88,23 +76,8 @@ class HotColdClassifier:
 
         # Hot thresholds
         hot = cls_config.get("hot", {})
-        self.hot_min_access = hot.get("min_access_per_day", 10)
-        self.hot_max_days = hot.get("max_days_since_access", 7)
-
-        # Warm thresholds
-        warm = cls_config.get("warm", {})
-        self.warm_min_access = warm.get("min_access_per_day", 1)
-        self.warm_max_days = warm.get("max_days_since_access", 30)
-
-        # Cold thresholds
-        cold = cls_config.get("cold", {})
-        self.cold_max_weekly = cold.get("max_access_per_week", 1)
-        self.cold_min_days = cold.get("min_days_since_access", 30)
-
-        # Archive thresholds
-        archive = cls_config.get("archive", {})
-        self.archive_max_monthly = archive.get("max_access_per_month", 1)
-        self.archive_min_days = archive.get("min_days_since_access", 90)
+        self.hot_min_access = hot.get("min_access_per_day", 1)
+        self.hot_max_days = hot.get("max_days_since_access", 30)
 
     def classify(self, files: List[FileAccessRecord]) -> ClassificationReport:
         """Classify all files and produce a report."""
@@ -133,57 +106,24 @@ class HotColdClassifier:
 
     def _classify_file(self, f: FileAccessRecord) -> ClassificationResult:
         """
-        Apply the classification algorithm to a single file.
+        Binary classification: HOT or COLD.
         
-        Decision flow:
-        1. Check HOT criteria first (highest priority)
-        2. Then WARM
-        3. Then ARCHIVE (before COLD, since archive is stricter)
-        4. Default to COLD
+        HOT: access >= threshold AND recent access
+        COLD: everything else
         """
-        tier = None
-        confidence = 0.0
-        reason = ""
-
-        # --- HOT: access > 10/day AND last_access < 7 days ---
-        if (f.access_count_today > self.hot_min_access and
+        # --- HOT: frequently accessed + recent ---
+        if (f.access_count_today >= self.hot_min_access and
                 f.days_since_last_access <= self.hot_max_days):
             tier = DataTier.HOT
-            confidence = min(1.0, f.access_count_today / (self.hot_min_access * 2))
-            reason = (f"Access frequency {f.access_count_today:.1f}/day > {self.hot_min_access}/day, "
-                      f"last accessed {f.days_since_last_access} days ago (< {self.hot_max_days})")
-
-        # --- WARM: access >= 1/day AND last_access < 30 days ---
-        elif (f.access_count_today >= self.warm_min_access and
-              f.days_since_last_access <= self.warm_max_days):
-            tier = DataTier.WARM
-            confidence = min(1.0, f.access_count_today / self.hot_min_access)
-            reason = (f"Access frequency {f.access_count_today:.1f}/day (1-10 range), "
-                      f"last accessed {f.days_since_last_access} days ago (< {self.warm_max_days})")
-
-        # --- ARCHIVE: access < 1/month AND last_access > 90 days ---
-        elif (f.access_count_monthly < self.archive_max_monthly and
-              f.days_since_last_access > self.archive_min_days):
-            tier = DataTier.ARCHIVE
-            confidence = min(1.0, self.archive_min_days / max(f.days_since_last_access, 1))
-            reason = (f"Access frequency {f.access_count_monthly:.1f}/month < {self.archive_max_monthly}/month, "
-                      f"last accessed {f.days_since_last_access} days ago (> {self.archive_min_days})")
-
-        # --- COLD: access < 1/week AND last_access > 30 days ---
-        elif (f.access_count_weekly < self.cold_max_weekly and
-              f.days_since_last_access > self.cold_min_days):
-            tier = DataTier.COLD
-            confidence = min(1.0, self.cold_min_days / max(f.days_since_last_access, 1))
-            reason = (f"Access frequency {f.access_count_weekly:.1f}/week < {self.cold_max_weekly}/week, "
-                      f"last accessed {f.days_since_last_access} days ago (> {self.cold_min_days})")
-
-        # --- DEFAULT: WARM (doesn't clearly fit other categories) ---
+            confidence = min(1.0, f.access_count_today / (self.hot_min_access * 10))
+            reason = (f"Access {f.access_count_today:.1f}/day >= {self.hot_min_access}/day, "
+                      f"last accessed {f.days_since_last_access} days ago (<= {self.hot_max_days})")
+        # --- COLD: everything else ---
         else:
-            tier = DataTier.WARM
-            confidence = 0.5
-            reason = (f"Does not clearly match hot/cold/archive criteria. "
-                      f"Access: {f.access_count_today:.1f}/day, "
-                      f"last access: {f.days_since_last_access} days ago. Defaulting to WARM.")
+            tier = DataTier.COLD
+            confidence = min(1.0, max(f.days_since_last_access, 1) / max(self.hot_max_days, 1))
+            reason = (f"Access {f.access_count_today:.1f}/day or last access {f.days_since_last_access} days ago. "
+                      f"Below HOT threshold -> COLD.")
 
         # Determine migration need
         recommended_location = TIER_LOCATIONS[tier]
@@ -213,6 +153,4 @@ class HotColdClassifier:
             return "to_local"
         elif recommended == "cloud_s3":
             return "to_cloud"
-        elif recommended == "cloud_glacier":
-            return "to_glacier"
         return "unknown"

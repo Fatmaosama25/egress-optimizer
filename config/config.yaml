@@ -22,32 +22,18 @@ minio:
   secret_key: "minioadmin123"
   local_bucket: "egress-local-data"
 
-# --- Data Classification Thresholds ---
+# --- Data Classification Thresholds (Binary: Hot vs Cold) ---
 classification:
   hot:
-    min_access_per_day: 10        # > 10 accesses/day
-    max_days_since_access: 7      # accessed within last 7 days
+    min_access_per_day: 1           # >= 1 access/day
+    max_days_since_access: 30       # accessed within last 30 days
     storage_location: "local"
-    description: "Frequently accessed - store locally"
-
-  warm:
-    min_access_per_day: 1         # 1-10 accesses/day
-    max_days_since_access: 30     # accessed within last 30 days
-    storage_location: "local"
-    description: "Moderately accessed - store locally"
+    description: "Frequently accessed - store locally (zero egress)"
 
   cold:
-    max_access_per_week: 1        # < 1 access/week
-    min_days_since_access: 30     # not accessed for 30+ days
     storage_location: "cloud_s3"
     storage_class: "STANDARD"
-    description: "Rarely accessed - store in cloud"
-
-  archive:
-    max_access_per_month: 1       # < 1 access/month
-    min_days_since_access: 90     # not accessed for 90+ days
-    storage_location: "cloud_glacier"
-    storage_class: "GLACIER"
+    description: "Rarely accessed - keep in cloud (cheap storage)"
     description: "Almost never accessed - archive in Glacier"
 
 # --- Cost Trigger Thresholds ---

@@ -20,10 +20,7 @@ from src.classifier.ml_classifier import MLClassifier
 def config():
     return {
         "classification": {
-            "hot": {"min_access_per_day": 10, "max_days_since_access": 7},
-            "warm": {"min_access_per_day": 1, "max_days_since_access": 30},
-            "cold": {"max_access_per_week": 1, "min_days_since_access": 30},
-            "archive": {"max_access_per_month": 1, "min_days_since_access": 90},
+            "hot": {"min_access_per_day": 1, "max_days_since_access": 30},
         },
     }
 
@@ -60,26 +57,12 @@ class TestRuleBasedClassifier:
         report = classifier.classify(files)
         assert report.results[0].tier == DataTier.HOT
 
-    def test_warm_classification(self, config):
-        """Moderate access + recent = WARM."""
-        classifier = HotColdClassifier(config)
-        files = [make_file(access_today=5, days_since=10)]
-        report = classifier.classify(files)
-        assert report.results[0].tier == DataTier.WARM
-
     def test_cold_classification(self, config):
         """Low access + old = COLD."""
         classifier = HotColdClassifier(config)
         files = [make_file(access_today=0.01, days_since=45)]
         report = classifier.classify(files)
         assert report.results[0].tier == DataTier.COLD
-
-    def test_archive_classification(self, config):
-        """Very low access + very old = ARCHIVE."""
-        classifier = HotColdClassifier(config)
-        files = [make_file(access_today=0.001, days_since=100)]
-        report = classifier.classify(files)
-        assert report.results[0].tier == DataTier.ARCHIVE
 
     def test_hot_recommends_local(self, config):
         """HOT files should be stored locally."""

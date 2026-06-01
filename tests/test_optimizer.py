@@ -21,10 +21,7 @@ def config():
     return {
         "simulation": {"num_files": 30, "seed": 42},
         "classification": {
-            "hot": {"min_access_per_day": 10, "max_days_since_access": 7},
-            "warm": {"min_access_per_day": 1, "max_days_since_access": 30},
-            "cold": {"max_access_per_week": 1, "min_days_since_access": 30},
-            "archive": {"max_access_per_month": 1, "min_days_since_access": 90},
+            "hot": {"min_access_per_day": 1, "max_days_since_access": 30},
         },
         "pricing": {
             "egress_per_gb": 0.09,

@@ -32,8 +32,8 @@ from sklearn.metrics import (
 import joblib
 
 
-# Label encoding
-TIER_LABELS = {"hot": 0, "warm": 1, "cold": 2, "archive": 3}
+# Label encoding (binary)
+TIER_LABELS = {"hot": 0, "cold": 1}
 TIER_NAMES = {v: k for k, v in TIER_LABELS.items()}
 
 
@@ -206,7 +206,7 @@ def train_and_evaluate(X, y):
 
     # Classification report
     print(f"\n  Classification Report:")
-    target_names = ["HOT", "WARM", "COLD", "ARCHIVE"]
+    target_names = ["HOT", "COLD"]
     report_str = classification_report(
         y_test, best["predictions"], target_names=target_names
     )
@@ -215,9 +215,9 @@ def train_and_evaluate(X, y):
     # Confusion matrix
     cm = confusion_matrix(y_test, best["predictions"])
     print(f"  Confusion Matrix:")
-    print(f"  {'':>10} {'HOT':>6} {'WARM':>6} {'COLD':>6} {'ARCH':>6}")
+    print(f"  {'':>10} {'HOT':>6} {'COLD':>6}")
     for i, row in enumerate(cm):
-        print(f"  {target_names[i]:>10} {row[0]:>6} {row[1]:>6} {row[2]:>6} {row[3]:>6}")
+        print(f"  {target_names[i]:>10} {row[0]:>6} {row[1]:>6}")
 
     return best["model"], best_name, results, y_test, best["predictions"]
 
@@ -236,7 +236,7 @@ def save_model(model, model_name, results, y_test, y_pred):
     print(f"\n  [OK] Model saved: src/classifier/model/rf_classifier.joblib")
 
     # Save training report
-    target_names = ["HOT", "WARM", "COLD", "ARCHIVE"]
+    target_names = ["HOT", "COLD"]
     report = {
         "trained_at": datetime.now().isoformat(),
         "model_type": model_name,

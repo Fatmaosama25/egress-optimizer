@@ -28,9 +28,7 @@ from src.classifier.hot_cold_classifier import (
 # Tier mapping from model output (int) to DataTier enum
 LABEL_TO_TIER = {
     0: DataTier.HOT,
-    1: DataTier.WARM,
-    2: DataTier.COLD,
-    3: DataTier.ARCHIVE,
+    1: DataTier.COLD,
 }
 
 
