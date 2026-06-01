@@ -8,7 +8,7 @@ version: '3.8'
 services:
   # --- LocalStack: Simulates AWS Cloud (S3 + CloudWatch) ---
   localstack:
-    image: localstack/localstack:latest
+    image: localstack/localstack:3.8
     container_name: egress-localstack
     ports:
       - "4566:4566"           # Main gateway for all AWS services

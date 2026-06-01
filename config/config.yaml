@@ -3,6 +3,25 @@
 # Configuration File - Thresholds & Pricing
 # ============================================================
 
+# --- Pipeline Mode ---
+# 'simulated' = use generated fake data (no Docker needed)
+# 'localstack' = use real S3 data from LocalStack + MinIO
+mode: localstack
+
+# --- Infrastructure Endpoints ---
+localstack:
+  endpoint_url: "http://localhost:4566"
+  region: "us-east-1"
+  access_key: "test"
+  secret_key: "test"
+  cloud_bucket: "egress-cloud-data"
+
+minio:
+  endpoint_url: "http://localhost:9000"
+  access_key: "minioadmin"
+  secret_key: "minioadmin123"
+  local_bucket: "egress-local-data"
+
 # --- Data Classification Thresholds ---
 classification:
   hot:

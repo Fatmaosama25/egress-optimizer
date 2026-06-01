@@ -21,6 +21,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.collector.simulated_collector import SimulatedCollector
+from src.collector.aws_collector import AWSCollector
 from src.analyzer.cost_analyzer import CostAnalyzer
 from src.classifier.hot_cold_classifier import HotColdClassifier
 from src.optimizer.migration_optimizer import MigrationOptimizer
@@ -59,13 +60,19 @@ def run_pipeline():
     # Load config
     config = load_config()
 
+    # Determine pipeline mode
+    mode = config.get("mode", "simulated")
+
     print_header("DevOps Automation for Cloud Egress Cost Optimization")
     print(f"  Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"  Mode: Simulated Data")
+    print(f"  Mode: {mode.upper()}")
 
     # ===== LAYER 1: DATA COLLECTION =====
     print_header("Layer 1: Data Collection")
-    collector = SimulatedCollector(config)
+    if mode == "localstack":
+        collector = AWSCollector(config)
+    else:
+        collector = SimulatedCollector(config)
     collection = collector.collect()
     print_metric("Source:", collector.get_source_name())
     print_metric("Files collected:", str(collection.total_files))
