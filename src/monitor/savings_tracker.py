@@ -95,6 +95,14 @@ class SavingsTracker:
                 "egress_pct_of_total": cost_report.egress_as_percentage,
                 "total_data_tb": round(cost_report.total_data_gb / 1000, 2),
             },
+            "savings": {
+                "monthly_savings": optimization.total_monthly_savings,
+                "annual_savings": optimization.total_annual_savings,
+            },
+            "cost_analysis": {
+                "total_monthly_cost": optimization.before_monthly_cost,
+                "top_files": cost_report.top_cost_files,
+            },
             "classification": {
                 "summary": classification.summary,
                 "size_by_tier": classification.size_by_tier,
@@ -102,10 +110,14 @@ class SavingsTracker:
                 "needing_migration": classification.total_needing_migration,
             },
             "migration": {
+                "approved": len(optimization.approved_migrations),
+                "rejected": len(optimization.rejected_migrations),
                 "approved_count": len(optimization.approved_migrations),
                 "rejected_count": len(optimization.rejected_migrations),
                 "total_cost": optimization.total_migration_cost,
+                "migration_cost": optimization.total_migration_cost,
                 "data_to_move_gb": optimization.total_data_to_move_gb,
+                "total_data_gb": optimization.total_data_to_move_gb,
                 "payback_months": optimization.estimated_payback_months,
             },
             "roi": {
@@ -113,6 +125,7 @@ class SavingsTracker:
                 "monthly_savings": optimization.total_monthly_savings,
                 "payback_months": (self.server_investment / optimization.total_monthly_savings
                                   if optimization.total_monthly_savings > 0 else 0),
+                "three_year_net": optimization.total_monthly_savings * 36 - self.server_investment,
                 "three_year_savings": optimization.total_monthly_savings * 36 - self.server_investment,
             },
             "top_cost_files": cost_report.top_cost_files,

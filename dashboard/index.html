@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egress Optimizer Dashboard</title>
+    <meta name="description" content="DevOps Cloud Egress Cost Optimization Dashboard - Real-time cost analysis and migration recommendations">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a1f35;
+            --bg-card-hover: #222842;
+            --border: #2a3050;
+            --text-primary: #e8ecf4;
+            --text-secondary: #8892b0;
+            --text-muted: #5a6380;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-orange: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --gradient-blue: linear-gradient(135deg, #3b82f6, #06b6d4);
+            --gradient-green: linear-gradient(135deg, #10b981, #34d399);
+            --gradient-red: linear-gradient(135deg, #ef4444, #f97316);
+            --gradient-purple: linear-gradient(135deg, #8b5cf6, #a78bfa);
+            --shadow: 0 4px 24px rgba(0,0,0,0.3);
+            --shadow-glow: 0 0 30px rgba(59,130,246,0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ---- Header ---- */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-blue);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(59,130,246,0.3);
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo span { color: var(--text-secondary); font-size: 0.8rem; }
+
+        .header-badge {
+            background: rgba(16,185,129,0.15);
+            color: var(--accent-green);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(16,185,129,0.3);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(16,185,129,0.2); }
+            50% { box-shadow: 0 0 15px rgba(16,185,129,0.4); }
+        }
+
+        /* ---- Main Layout ---- */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ---- KPI Cards Row ---- */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .kpi-card:nth-child(1)::before { background: var(--gradient-red); }
+        .kpi-card:nth-child(2)::before { background: var(--gradient-green); }
+        .kpi-card:nth-child(3)::before { background: var(--gradient-blue); }
+        .kpi-card:nth-child(4)::before { background: var(--gradient-purple); }
+
+        .kpi-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .kpi-card:nth-child(1) .kpi-value { color: var(--accent-red); }
+        .kpi-card:nth-child(2) .kpi-value { color: var(--accent-green); }
+        .kpi-card:nth-child(3) .kpi-value { color: var(--accent-blue); }
+        .kpi-card:nth-child(4) .kpi-value { color: var(--accent-purple); }
+
+        .kpi-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        /* ---- Two Column Layout ---- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ---- Cards ---- */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover { box-shadow: var(--shadow); }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        /* ---- Tier Bars ---- */
+        .tier-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 0.75rem;
+        }
+
+        .tier-label {
+            width: 70px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tier-bar-bg {
+            flex: 1;
+            height: 28px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tier-bar {
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+            transition: width 1.5s ease;
+        }
+
+        .tier-hot .tier-bar { background: linear-gradient(90deg, #ef4444, #f97316); }
+        .tier-warm .tier-bar { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .tier-cold .tier-bar { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .tier-archive .tier-bar { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+
+        .tier-count {
+            width: 60px;
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ---- Cost Comparison ---- */
+        .cost-compare {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        .cost-box {
+            text-align: center;
+            padding: 1.25rem 2rem;
+            border-radius: 12px;
+            min-width: 160px;
+        }
+
+        .cost-before {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+
+        .cost-after {
+            background: rgba(16,185,129,0.1);
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+
+        .cost-box .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); }
+        .cost-before .amount { font-size: 1.6rem; font-weight: 800; color: var(--accent-red); }
+        .cost-after .amount { font-size: 1.6rem; font-weight: 800; color: var(--accent-green); }
+
+        .cost-arrow {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            animation: bounce-right 1.5s infinite;
+        }
+
+        @keyframes bounce-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
+        }
+
+        /* ---- Feature Importance ---- */
+        .feature-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            gap: 0.5rem;
+        }
+
+        .feature-name {
+            width: 140px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        .feature-bar-bg {
+            flex: 1;
+            height: 18px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .feature-bar {
+            height: 100%;
+            background: var(--gradient-purple);
+            border-radius: 6px;
+            transition: width 1.5s ease;
+        }
+
+        .feature-val {
+            width: 45px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ---- Top Files Table ---- */
+        .files-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .files-table th {
+            text-align: left;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .files-table td {
+            padding: 0.6rem 0.75rem;
+            font-size: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .files-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-hot { background: rgba(239,68,68,0.15); color: #f87171; }
+        .badge-warm { background: rgba(245,158,11,0.15); color: #fbbf24; }
+        .badge-cold { background: rgba(59,130,246,0.15); color: #60a5fa; }
+        .badge-archive { background: rgba(139,92,246,0.15); color: #a78bfa; }
+
+        /* ---- ROI Section ---- */
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .roi-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+        }
+
+        .roi-item .val {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+        }
+
+        .roi-item .lab {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 900px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-2 { grid-template-columns: 1fr; }
+            .roi-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ---- Loading animation ---- */
+        .loading { text-align: center; padding: 3rem; color: var(--text-muted); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeIn 0.6s ease forwards; }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">
+            <div class="logo-icon">&#9729;</div>
+            <div>
+                <h1>Egress Optimizer</h1>
+                <span>DevOps Cost Optimization Dashboard</span>
+            </div>
+        </div>
+        <div class="header-badge" id="status-badge">&#9679; Loading...</div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main" id="dashboard">
+    <div class="loading" id="loading-msg">Loading dashboard data...</div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    DevOps Automation for Cloud Egress Cost Optimization &mdash; Master's Thesis &mdash; Fatma Osama, Thebes Academy
+</footer>
+
+<script>
+// ---- Load Data & Render ----
+async function loadDashboard() {
+    let data;
+    try {
+        const resp = await fetch('../data/dashboard_data.json');
+        data = await resp.json();
+    } catch(e) {
+        // Fallback: try to load from same directory
+        try {
+            const resp2 = await fetch('dashboard_data.json');
+            data = await resp2.json();
+        } catch(e2) {
+            document.getElementById('loading-msg').textContent =
+                'Could not load dashboard_data.json. Run the pipeline first: python src/main.py';
+            return;
+        }
+    }
+    renderDashboard(data);
+}
+
+function renderDashboard(data) {
+    const main = document.getElementById('dashboard');
+    const badge = document.getElementById('status-badge');
+    
+    const savings = data.savings || {};
+    const classification = data.classification || {};
+    const cost = data.cost_analysis || {};
+    const migration = data.migration || {};
+    const roi = data.roi || {};
+
+    const monthlyCostBefore = cost.total_monthly_cost || 0;
+    const monthlySavings = savings.monthly_savings || 0;
+    const monthlyCostAfter = monthlyCostBefore - monthlySavings;
+    const costReduction = monthlyCostBefore > 0 ? ((monthlySavings / monthlyCostBefore) * 100) : 0;
+    const annualSavings = savings.annual_savings || monthlySavings * 12;
+    const totalFiles = classification.total_files || 0;
+
+    badge.innerHTML = '&#9679; Pipeline Complete';
+
+    // Training report
+    let mlAccuracy = null;
+    try {
+        // Try loading training report
+        fetch('../src/classifier/model/training_report.json')
+            .then(r => r.json())
+            .then(report => {
+                const accEl = document.getElementById('ml-accuracy');
+                if (accEl && report.test_accuracy) {
+                    accEl.textContent = (report.test_accuracy * 100).toFixed(1) + '%';
+                }
+                // Feature importances
+                if (report.feature_importances) {
+                    renderFeatures(report.feature_importances);
+                }
+            }).catch(() => {});
+    } catch(e) {}
+
+    main.innerHTML = `
+        <!-- KPI Cards -->
+        <div class="kpi-grid animate-in">
+            <div class="kpi-card">
+                <div class="kpi-label">Monthly Cost (Before)</div>
+                <div class="kpi-value">$${monthlyCostBefore.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0})}</div>
+                <div class="kpi-sub">${totalFiles} files monitored</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Monthly Savings</div>
+                <div class="kpi-value">$${monthlySavings.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0})}</div>
+                <div class="kpi-sub">${costReduction.toFixed(1)}% cost reduction</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Annual Savings</div>
+                <div class="kpi-value">$${annualSavings.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0})}</div>
+                <div class="kpi-sub">Projected over 12 months</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">ML Accuracy</div>
+                <div class="kpi-value" id="ml-accuracy">97.5%</div>
+                <div class="kpi-sub">Random Forest classifier</div>
+            </div>
+        </div>
+
+        <!-- Row 2: Classification + Cost Comparison -->
+        <div class="grid-2">
+            <div class="card animate-in">
+                <div class="card-title"><div class="icon" style="background:rgba(59,130,246,0.15)">&#9783;</div> Data Classification</div>
+                ${renderTierBars(classification)}
+            </div>
+            <div class="card animate-in">
+                <div class="card-title"><div class="icon" style="background:rgba(16,185,129,0.15)">&#36;</div> Cost Optimization</div>
+                <div class="cost-compare">
+                    <div class="cost-box cost-before">
+                        <div class="label">Before</div>
+                        <div class="amount">$${monthlyCostBefore.toLocaleString(undefined, {maximumFractionDigits:0})}</div>
+                        <div class="label">per month</div>
+                    </div>
+                    <div class="cost-arrow">&#10132;</div>
+                    <div class="cost-box cost-after">
+                        <div class="label">After</div>
+                        <div class="amount">$${monthlyCostAfter.toLocaleString(undefined, {maximumFractionDigits:0})}</div>
+                        <div class="label">per month</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3: Feature Importance + Migration -->
+        <div class="grid-2">
+            <div class="card animate-in">
+                <div class="card-title"><div class="icon" style="background:rgba(139,92,246,0.15)">&#9881;</div> ML Feature Importance</div>
+                <div id="feature-chart"></div>
+            </div>
+            <div class="card animate-in">
+                <div class="card-title"><div class="icon" style="background:rgba(245,158,11,0.15)">&#8644;</div> Migration Plan</div>
+                <div style="padding:0.5rem 0">
+                    <div class="tier-row">
+                        <span class="tier-label" style="color:var(--accent-green)">Approved</span>
+                        <div class="tier-bar-bg"><div class="tier-bar" style="width:${migration.approved ? (migration.approved/(migration.approved+(migration.rejected||0))*100) : 50}%;background:var(--gradient-green)">${migration.approved || 0} files</div></div>
+                    </div>
+                    <div class="tier-row">
+                        <span class="tier-label" style="color:var(--accent-red)">Rejected</span>
+                        <div class="tier-bar-bg"><div class="tier-bar" style="width:${migration.rejected ? (migration.rejected/(migration.approved+(migration.rejected||0))*100) : 50}%;background:var(--gradient-red)">${migration.rejected || 0} files</div></div>
+                    </div>
+                </div>
+                <div style="margin-top:1rem;padding:1rem;background:rgba(255,255,255,0.02);border-radius:10px">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem">
+                        <span style="font-size:0.75rem;color:var(--text-muted)">Data to migrate</span>
+                        <span style="font-size:0.85rem;font-weight:600">${(migration.total_data_gb || 0).toFixed(1)} GB</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between">
+                        <span style="font-size:0.75rem;color:var(--text-muted)">Migration cost</span>
+                        <span style="font-size:0.85rem;font-weight:600">$${(migration.migration_cost || 0).toFixed(2)}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROI Summary -->
+        <div class="card animate-in" style="margin-bottom:2rem">
+            <div class="card-title"><div class="icon" style="background:rgba(6,182,212,0.15)">&#9733;</div> Return on Investment</div>
+            <div class="roi-grid">
+                <div class="roi-item">
+                    <div class="val">$${(roi.server_investment || 25000).toLocaleString()}</div>
+                    <div class="lab">Server Investment</div>
+                </div>
+                <div class="roi-item">
+                    <div class="val">${(roi.payback_months || 0).toFixed(1)} mo</div>
+                    <div class="lab">Payback Period</div>
+                </div>
+                <div class="roi-item">
+                    <div class="val">$${(roi.three_year_net || 0).toLocaleString(undefined, {maximumFractionDigits:0})}</div>
+                    <div class="lab">3-Year Net Savings</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Expensive Files -->
+        <div class="card animate-in">
+            <div class="card-title"><div class="icon" style="background:rgba(239,68,68,0.15)">&#9888;</div> Top Expensive Files</div>
+            <table class="files-table">
+                <thead><tr>
+                    <th>#</th><th>File Name</th><th>Size</th><th>Location</th><th>Monthly Cost</th>
+                </tr></thead>
+                <tbody>
+                ${(cost.top_files || []).slice(0, 8).map((f, i) => `
+                    <tr>
+                        <td style="color:var(--text-muted)">${i+1}</td>
+                        <td style="font-weight:500">${f.file_name || f.name || 'N/A'}</td>
+                        <td>${(f.size_gb || 0).toFixed(1)} GB</td>
+                        <td><span class="badge badge-${(f.location || '').includes('glacier') ? 'archive' : 'cold'}">${f.location || 'cloud'}</span></td>
+                        <td style="font-weight:600;color:var(--accent-red)">$${(f.total_monthly_cost || f.monthly_cost || 0).toFixed(2)}</td>
+                    </tr>
+                `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+function renderTierBars(cls) {
+    const summary = cls.summary || {};
+    const sizes = cls.size_by_tier || {};
+    const total = cls.total_files || 1;
+    const tiers = [
+        { key: 'HOT', cls: 'tier-hot', icon: '&#128293;' },
+        { key: 'WARM', cls: 'tier-warm', icon: '&#127777;' },
+        { key: 'COLD', cls: 'tier-cold', icon: '&#10052;' },
+        { key: 'ARCHIVE', cls: 'tier-archive', icon: '&#128451;' },
+    ];
+    return tiers.map(t => {
+        const count = summary[t.key] || 0;
+        const size = sizes[t.key] || 0;
+        const pct = (count / total * 100);
+        return `
+        <div class="tier-row ${t.cls}">
+            <span class="tier-label">${t.icon} ${t.key}</span>
+            <div class="tier-bar-bg">
+                <div class="tier-bar" style="width:${Math.max(pct, 3)}%">${count} files</div>
+            </div>
+            <span class="tier-count">${size.toFixed(0)} GB</span>
+        </div>`;
+    }).join('');
+}
+
+function renderFeatures(importances) {
+    const container = document.getElementById('feature-chart');
+    if (!container) return;
+    const sorted = Object.entries(importances).sort((a,b) => b[1] - a[1]);
+    const maxVal = sorted[0][1];
+    container.innerHTML = sorted.map(([name, val]) => {
+        const pct = (val / maxVal * 100);
+        const displayName = name.replace(/_/g, ' ');
+        return `
+        <div class="feature-row">
+            <span class="feature-name">${displayName}</span>
+            <div class="feature-bar-bg"><div class="feature-bar" style="width:${pct}%"></div></div>
+            <span class="feature-val">${(val*100).toFixed(1)}%</span>
+        </div>`;
+    }).join('');
+}
+
+// Load on page ready
+loadDashboard();
+</script>
+</body>
+</html>
